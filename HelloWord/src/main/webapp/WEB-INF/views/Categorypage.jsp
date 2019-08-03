@@ -49,7 +49,7 @@
 </div>
 </form:form>
 
-
+<div class="container">
 <h1>Category Details</h1>
 
 <table class="table"  style="width:75%">
@@ -72,5 +72,6 @@
     
   
 </table>
+</div>
  </body>
 </html>

@@ -8,6 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="Navbar.jsp" />  
 <c:url value=/homepage var="signupurl"/>
  <form action="${signupurl}" style="border:1px solid #ccc" method="post">
   <div class="container">

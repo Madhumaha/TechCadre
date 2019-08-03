@@ -21,15 +21,15 @@
 <tr>
 		<td>Payment Mode </td>
 		<td>
-  		 <input type="radio" name="pmode" value="CC">Credit Card
-		<input type="radio" name="pmode" value="CD">Cash On Delivery
+  		 <input type="text" name="pmode" value="Credit/Debit Card details" readonly>
+<!-- 		<input type="radio" name="pmode" value="CD">Cash On Delivery -->
 		</td>
 	</tr>
 	
 	
 	<tr>
-		<td>Credit Card</td>
-		<td><input type="text"pattern="^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$" name="ccard"/></td>
+		<td>Credit/Debit Card No</td>
+		<td><input type="text" pattern="^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$" name="ccard"/></td>
 	</tr>
 	
 	<tr>

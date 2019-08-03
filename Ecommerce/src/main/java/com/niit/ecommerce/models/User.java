@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -17,15 +18,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	@Id
-	@Email @NotEmpty
+	@Email 
+	@NotEmpty
 	String email_id;
-    @Size(min=3, max=30)
-    @NotEmpty(message= "{errorrrr}")
+    @Size(min=3, max=30,message="Name invalid")
+    @NotEmpty(message= "enter name")
+    @NotNull(message="enter name")
 	String firstname;
     @Size(min=3, max=30)
 	String lastname;
     String contactnumber;
     @NotEmpty
+    @Size(min=5,message="Min 5 char")
 	String password;
     @NotEmpty
 	String shipping_address;

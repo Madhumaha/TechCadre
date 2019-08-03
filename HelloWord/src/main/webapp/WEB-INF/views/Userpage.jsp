@@ -17,8 +17,8 @@
   <div class="container">
     <h1>User Details</h1>
     
-    
-
+     <p style="color:red">${usermailerror}</p>
+<form:errors path="firstname" style="color:red"></form:errors>
 
 <div class="form-group row">
     <form:label path="firstname"><b>First name</b></form:label>
@@ -29,7 +29,7 @@
 <div class="form-group row">
     <form:label path="lastname"><b>last name</b></form:label>
     <form:input path="lastname" type="text" class="form-control" placeholder="" name="last name" required="true"/><br>
-     <form:errors path="lastname"></form:errors>
+     <form:errors path="lastname" style="color:red"></form:errors>
 </div>
 
 <div class="form-group row">
@@ -40,25 +40,26 @@
 <div class="form-group row">
     <form:label path="email_id"><b>User emailId</b></form:label>
     <form:input path="email_id" type="text" class="form-control" placeholder="" name="User emailId" required="true"/><br>
-     <form:errors path="email_id"></form:errors>
+     <form:errors path="email_id" style="color:red"></form:errors>
+    
 </div>
 
 <div class="form-group row">
     <form:label path="password"><b>Password</b></form:label>
     <form:input path="password" type="password" class="form-control" placeholder="" name="Password" required="true"/><br>
-     <form:errors path="password"></form:errors>
+     <form:errors path="password" style="color:red"></form:errors>
 </div>
 
 <div class="form-group row">
     <form:label path="shipping_address"><b>shipping_address</b></form:label>
     <form:textarea path="shipping_address" class="form-control" placeholder="" name="shipping_address" required="true"/><br>
-     <form:errors path="shipping_address"></form:errors>
+     <form:errors path="shipping_address" style="color:red"></form:errors>
 </div>
 
 <div class="form-group row">
     <form:label path="billing_address"><b>billing_address</b></form:label>
     <form:textarea path="billing_address" class="form-control" placeholder="" name="billing_address" required="true"/><br>
-     <form:errors path="billing_address"></form:errors>
+     <form:errors path="billing_address" style="color:red"></form:errors>
 </div>
 
 <div class="form-group row">

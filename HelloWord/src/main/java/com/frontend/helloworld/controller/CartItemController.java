@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.niit.ecommerce.dao.CartItemDao;
+import com.niit.ecommerce.dao.CategoryDao;
 import com.niit.ecommerce.dao.OrderDetailsDao;
 import com.niit.ecommerce.dao.ProductDao;
 import com.niit.ecommerce.dao.UserDao;
@@ -24,11 +25,14 @@ import com.niit.ecommerce.models.Product;
 import com.niit.ecommerce.models.User;
 
 @Controller
+@RequestMapping(value="/cart")
 public class CartItemController {
 	@Autowired
 	private CartItemDao cartItemDao;
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	CategoryDao categoryDAO;
 	@Autowired
 	 UserDao userDAO;
 	@Autowired
@@ -36,7 +40,7 @@ public class CartItemController {
 	@Autowired
 	Product p;
 		
-	@RequestMapping(value="/cart/addtocart/{product_id}")
+	@RequestMapping(value="/addtocart/{product_id}")
 	public String addToCart(@PathVariable int product_id,
 			@RequestParam int requestedQuantity,@AuthenticationPrincipal Principal principal){//get two values from jsp page
 		//1st value - product id
@@ -95,29 +99,32 @@ public class CartItemController {
 	
 	
 	
-	@RequestMapping("/cart/getcartitems")
+	@RequestMapping("/getcartitems")
 	public String getCartItems(@AuthenticationPrincipal Principal principal,Model model		){
 		List<CartItem> cartItems=null;
 		if(principal!=null)
 		cartItems=cartItemDao.getCartItems(principal.getName());
+		//model.addObject("productlist",productDAO.listProducts());
+		model.addAttribute("categorylist",categoryDAO.listCategories());
 		model.addAttribute("cartItems",cartItems);
 		return "cart";
 	}
-	@RequestMapping("/cart/updatecartitem")
+	
+	@RequestMapping("/updatecartitem")
 	public String updateCartItem(@RequestParam int cartItemId,@RequestParam int requestedQuantity){
 		System.out.println(cartItemId + " " + requestedQuantity);
 		cartItemDao.updateCartItem(cartItemId,requestedQuantity);
 		return "redirect:/cart/getcartitems";
 	}
 
-	@RequestMapping(value="/cart/deletecartitem/{cartItemId}")
+	@RequestMapping(value="/deletecartitem/{cartItemId}")
 	public String deleteCartItem(@PathVariable int cartItemId){
 	    cartItemDao.deleteCartItem(cartItemId);
 		return "redirect:/cart/getcartitems";
 	}
 	
 	
-	@RequestMapping(value="/cart/createorder")
+	@RequestMapping(value="/createorder")
 	public String createCustomerOrder(@AuthenticationPrincipal Principal principal,HttpSession session){
 		//set updated shippingaddress in customer object 
 		
@@ -143,7 +150,7 @@ public class CartItemController {
 			cartItemDao.deleteCartItem(cartItem.getCartItemId());
 		}
 		
-		return "redirect:/orderdisplay";
+		return "redirect:/cart/orderdisplay";
 	}
 	
 

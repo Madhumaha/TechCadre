@@ -33,11 +33,11 @@ public class UserDaoimpl implements UserDao{
 		}
 
 		
-		public User getUser(String s) {
+		public User getUser(String email) {
 			Session session=sessionFactory.getCurrentSession();
 			try
 			{
-			User user=(User)session.get(User.class, s);
+			User user=(User)session.get(User.class, email);
 			//SQL query select * from user where id=?
 			return user;
 			}

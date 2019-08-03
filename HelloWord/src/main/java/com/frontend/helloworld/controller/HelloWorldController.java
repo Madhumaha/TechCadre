@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.ecommerce.dao.CartItemDao;
@@ -84,18 +85,7 @@ public class HelloWorldController {
 	}
 	
 	
-	@RequestMapping("/Navbar")
-	public ModelAndView nav()
-	{
-
-		ModelAndView mv = new ModelAndView("Navbar");
-		mv.addObject("categorylist",categoryDAO.listCategories());
-		return mv;
-	}
-	
-	
-	
-	
+		
 	@RequestMapping("/signin")
 	public ModelAndView in()
 	{
@@ -106,14 +96,19 @@ public class HelloWorldController {
 	}
 		
 
-	
-	@RequestMapping("/signup")
-	public ModelAndView up()
-	{
-		ModelAndView mv = new ModelAndView("signup");
-		mv.addObject("categorylist",categoryDAO.listCategories());
-		return mv;
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accesssDenied(Principal user) {
+
+		ModelAndView model = new ModelAndView();
+
+		 
+			model.addObject("msg", 
+			"You do not have permission to access this page!");
 		
+
+		model.setViewName("403");
+		return model;
+
 	}
 	
 	@RequestMapping("/viewproduct/{product_id}")
@@ -135,13 +130,14 @@ public class HelloWorldController {
 //	}
 	
 	
-	@RequestMapping("/orderdisplay")
+	@RequestMapping("/cart/orderdisplay")
 	public String display(@AuthenticationPrincipal Principal principal,Model model){
 		String email=principal.getName();
 		User user=userDAO.getUser(email);
 		System.out.println(email);
 	  List<OrderDetails> OrderDetails=orderdetailsDao.listOrders(email);
 	  model.addAttribute("odlist",OrderDetails);
+	  model.addAttribute("categorylist",categoryDAO.listCategories());
 			return "orderdetails"; 
 		
 	}

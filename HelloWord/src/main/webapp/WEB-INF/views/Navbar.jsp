@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%> 
+    <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,10 +45,11 @@
 <c:if test="${pageContext.request.userPrincipal.name != null }">
 <li><a href="#">Welcome, ${ufname}</a></li>
 </c:if>
-
-<c:if test="${pageContext.request.userPrincipal.name == 'maha@gmail.com'}">
+<security:authorize access="hasRole('ROLE_ADMIN')">
+<%-- <c:if test="${pageContext.request.userPrincipal.name == 'maha@gmail.com'}"> --%>
       <li><a href="<c:url value="/admin/adminpage" />" >ADMIN</a></li>
-      </c:if>
+<%--       </c:if> --%>
+</security:authorize>
       <c:if test="${pageContext.request.userPrincipal.name == null }">
       <li><a href="<c:url value="/Userpage" />" ><span class="glyphicon glyphicon-user">SignUp</span></a></li>
       <li><a href="<c:url value="/signin" />" ><span class="glyphicon glyphicon-log-in"> </span> Sign In</a></li>
@@ -56,10 +58,10 @@
       <li><a href="<c:url value="/j_spring_security_logout" />" ><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
       </c:if>
       <c:if test="${pageContext.request.userPrincipal.name != null }">
-      <c:if test="${pageContext.request.userPrincipal.name != 'maha@gmail.com'}">
+      <security:authorize access="hasRole('ROLE_USER')">
       <li><a href="<c:url value="/cart/getcartitems" />" ><span class="glyphicon glyphicon-shopping-cart"></span>My Cart</a></li>
-      <li><a href="<c:url value="/orderdisplay" />" ></span>My Orders</a></li>
-      </c:if>
+      <li><a href="<c:url value="/cart/orderdisplay" />" ></span>My Orders</a></li>
+      </security:authorize>
       </c:if>
       </ul>
     </nav>
